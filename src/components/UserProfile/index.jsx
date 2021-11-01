@@ -1,16 +1,21 @@
+import { useContext } from "react";
+import { userContext } from '../../contexts/GithubProfileContext'
 import { Container, UserPhoto, UserInfo, GithubInformations } from "./styles";
 
 export function UserProfile() {
+
+    const { profile } = useContext(userContext);
+
     return (
         <Container>
-            <UserPhoto src="https://github.com/jeanmrtns.png" alt="Jean Martins" />
+            <UserPhoto src={profile.avatar_url} alt={profile.name} />
             <UserInfo>
-                <p>Nome: <span>Jean Martins</span></p>
-                <p>Idade: <span>22 anos</span></p>
-                <p>Blog: <span><a href="https://blog-jean.vercel.app/">https://blog-jean.vercel.app/</a></span></p>
+                <p>Nome: <span>{profile.name}</span></p>
+                <p>Sobre: <span>{profile.bio}</span></p>
+                <p>Blog: <span><a href={profile.blog}>{profile.blog}</a></span></p>
                 <GithubInformations>
-                    <p>Repositórios: <span>51</span></p>
-                    <p>Stared: <span>2</span></p>
+                    <p>Repositórios: <span>{profile.public_repos}</span></p>
+                    <p>Stared: <span>{profile.public_gists}</span></p>
                 </GithubInformations>
             </UserInfo>
         </Container>
